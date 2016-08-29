@@ -1,0 +1,16 @@
+{
+    "name": "vrann/http-rabbitmq-writer",
+    "description": "Simple daemon which writes all HTTP requests to RabbitMQ",
+    "type": "project",
+    "require": {
+        "php-amqplib/php-amqplib": "2.5.*",
+        "monolog/monolog": "1.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eugene Tulika",
+            "email": "vranen@gmail.com"
+        }
+    ]
+}
