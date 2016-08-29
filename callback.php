@@ -22,12 +22,11 @@ $logger->addDebug($jsonString);
 
 $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
 $channel = $connection->channel();
-
-$channel->queue_declare('callback.received', false, false, false, false);
-
-$msg = new AMQPMessage($jsonString);
-$channel->basic_publish($msg, '', 'callback.received');
-$logger->addInfo('Request is written');
-
+$topic = 'callback.received';
+$channel->queue_declare($topic, false, false, false, false);
+$msg = new AMQPMessage($jsonString, ['message_id' => md5(uniqid($topic))]);
+$channel->basic_publish($msg, '', $topic);
 $channel->close();
 $connection->close();
+
+$logger->addInfo('Request is written');
