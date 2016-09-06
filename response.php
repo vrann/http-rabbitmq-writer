@@ -27,10 +27,10 @@ $callback = function($msg) use ($logger) {
     /**
      * @var Logger $logger
      */
-    $message = json_decode($msg->body);
-    $logger->addDebug(' [x] ' . $msg->delivery_info['routing_key'] . ':' . json_encode($message) . "\n");
+    $message = json_decode($msg->body, true)['message'];
+    $logger->addDebug(' [x] ' . $msg->delivery_info['routing_key'] . ':' . $message . "\n");
     $transport = new \Vrann\FbChatBot\Transport\Http(TOKEN, $logger);
-    $transport->send(json_encode($message));
+    $transport->send($message);
 };
 
 $channel->basic_consume($queue, '', false, true, false, false, $callback);
