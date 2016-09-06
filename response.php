@@ -10,7 +10,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 $logger = new Logger('my_logger');
-$logger->pushHandler(new StreamHandler('/tmp/http-rabbitmq-writer.log', Logger::DEBUG));
+$logger->pushHandler(new StreamHandler('/tmp/http-rabbitmq-responser.log', Logger::DEBUG));
 $logger->addInfo('Responser activated');
 
 $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
@@ -24,7 +24,10 @@ $queue = 'queue.vrann.magebot.api.messageSenderInterface.sendMessage';
  * @param $msg
  */
 $callback = function($msg) use ($logger) {
-    $logger->addDebug(' [x] ',$msg->delivery_info['routing_key'], ':', $msg->body, "\n");
+    /**
+     * @var Logger $logger
+     */
+    $logger->addDebug(' [x] ' . $msg->delivery_info['routing_key'] . ':' . $msg->body . "\n");
     $transport = new \Vrann\FbChatBot\Transport\Http(self::TOKEN, $logger);
     $transport->send($msg->body);
 };
