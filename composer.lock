@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "47c5c12f95afc36be4c789ca3241cb3a",
-    "content-hash": "2192a7a1d2e4f8ace61e5c92800d6e34",
+    "hash": "1148c84c24a99ab9fc06383985907df4",
+    "content-hash": "c820230d3b8250ca330f252e6e360c11",
     "packages": [
         {
             "name": "monolog/monolog",
@@ -176,12 +176,53 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "vrann/fbchatbot",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vrann/facebook-chatbot.git",
+                "reference": "a9063bcbe52849791058b3568b50d516ff29686e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vrann/facebook-chatbot/zipball/a9063bcbe52849791058b3568b50d516ff29686e",
+                "reference": "a9063bcbe52849791058b3568b50d516ff29686e",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vrann\\FbChatBot\\": "src/Vrann/FbChatBot"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eugene Tulika",
+                    "email": "vranen@gmail.com"
+                }
+            ],
+            "description": "Framework to create Facebook Messenger Bots on PHP",
+            "time": "2016-08-28 06:08:37"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "vrann/fbchatbot": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

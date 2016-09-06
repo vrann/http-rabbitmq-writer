@@ -4,7 +4,8 @@
     "type": "project",
     "require": {
         "php-amqplib/php-amqplib": "2.5.*",
-        "monolog/monolog": "1.*"
+        "monolog/monolog": "1.*",
+        "vrann/fbchatbot": "dev-master"
     },
     "license": "MIT",
     "authors": [
