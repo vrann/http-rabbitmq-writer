@@ -21,11 +21,12 @@ if (empty($jsonString)) {
 $logger->addDebug($jsonString);
 
 $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+/** @var \PhpAmqpLib\Channel\AMQPChannel $channel */
 $channel = $connection->channel();
 $topic = 'callback.received';
 $channel->queue_declare($topic, false, false, false, false);
 $msg = new AMQPMessage($jsonString, ['message_id' => md5(uniqid($topic))]);
-$channel->basic_publish($msg, '', $topic);
+$channel->basic_publish($msg, 'facebook-integration', $topic);
 $channel->close();
 $connection->close();
 
