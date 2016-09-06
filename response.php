@@ -5,9 +5,9 @@
 
 include __DIR__ . "/vendor/autoload.php";
 use PhpAmqpLib\Connection\AMQPStreamConnection;
-use PhpAmqpLib\Message\AMQPMessage;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+const TOKEN = 'EAAEg1NXI6wABAGOpnSPZAU9ltfwKZBDj38eu2Sj5aPl7pDWcZCXkPluoK4lshJnHiWKUxBZC4F5kPJPfR2q1DZAw2H9Xr8ODR44g0wVgrd70cCl3WsFo3eE62CiqYTixsmGMvFIutNzeqqEeRNXjLMmjTTZCY8EvOOaScgd7gmuAZDZD';
 
 $logger = new Logger('my_logger');
 $logger->pushHandler(new StreamHandler('/tmp/http-rabbitmq-responser.log', Logger::DEBUG));
@@ -28,7 +28,7 @@ $callback = function($msg) use ($logger) {
      * @var Logger $logger
      */
     $logger->addDebug(' [x] ' . $msg->delivery_info['routing_key'] . ':' . $msg->body . "\n");
-    $transport = new \Vrann\FbChatBot\Transport\Http(self::TOKEN, $logger);
+    $transport = new \Vrann\FbChatBot\Transport\Http(TOKEN, $logger);
     $transport->send($msg->body);
 };
 
