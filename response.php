@@ -11,7 +11,7 @@ $ACCESS_TOKEN = getenv('FB_ACCESS_TOKEN');
 
 $logger = new Logger('my_logger');
 $logger->pushHandler(new StreamHandler('/tmp/http-rabbitmq-responser.log', Logger::DEBUG));
-$logger->addInfo('Responser activated');
+$logger->addInfo('Responser activated. Access Token: ' . $ACCESS_TOKEN);
 
 $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
 /** @var \PhpAmqpLib\Channel\AMQPChannel $channel */
@@ -27,7 +27,7 @@ $callback = function($msg) use ($logger, $ACCESS_TOKEN) {
      * @var Logger $logger
      */
     $message = json_decode($msg->body, true)['message'];
-    $logger->addDebug(' [x] ' . $msg->delivery_info['routing_key'] . ':' . $message . "\n");
+    $logger->addDebug(' [x] ' . $msg->delivery_info['routing_key'] . ':' . $message . ' Access Token: ' . $ACCESS_TOKEN . "\n");
     $transport = new \Vrann\FbChatBot\Transport\Http($ACCESS_TOKEN, $logger);
     try {
         $transport->send($message);
