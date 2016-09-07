@@ -1,6 +1,6 @@
 <?php
 /**
- * Entry point to Chat Bot
+ * Receives HTTP requests and writes them to RabbitMQ
  */
 
 include __DIR__ . "/vendor/autoload.php";
@@ -23,9 +23,12 @@ $logger->addDebug($jsonString);
 $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
 /** @var \PhpAmqpLib\Channel\AMQPChannel $channel */
 $channel = $connection->channel();
+
 $topic = 'callback.received';
+$exchange = 'facebook-integration';
+
 $msg = new AMQPMessage($jsonString, ['message_id' => md5(uniqid($topic))]);
-$channel->basic_publish($msg, 'facebook-integration', $topic);
+$channel->basic_publish($msg, $exchange, $topic);
 $channel->close();
 $connection->close();
 

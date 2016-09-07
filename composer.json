@@ -1,6 +1,6 @@
 {
     "name": "vrann/http-rabbitmq-writer",
-    "description": "Simple daemon which writes all HTTP requests to RabbitMQ",
+    "description": "Simple daemon which writes all HTTP requests to RabbitMQ and sends RabbitMQ messages over HTTP",
     "type": "project",
     "require": {
         "php-amqplib/php-amqplib": "2.5.*",
